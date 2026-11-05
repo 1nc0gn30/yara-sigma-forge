@@ -1055,6 +1055,22 @@ DETECTION STRATEGY:
       selectPreset(PRESETS[0]);
     });
   </script>
-  <script src="/assets/sovereign-upgrade.js" defer></script>
+  
+
+  <script src="/sovereign_tutorial.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.createSovereignTutorial) {
+        window.createSovereignTutorial({
+          toolId: "yara-sigma-forge",
+          toolName: "YARA-X & Sigma Threat Rule Forge",
+          tagline: "Author and test threat detection rules for cyber defense and malware hunting!",
+          accentColor: "#F59E0B",
+          steps: [{"icon": "\ud83c\udfaf", "title": "What are YARA and Sigma Rules?", "desc": "Digital fingerprints used by cybersecurity defenders to hunt down computer viruses and detect hacker activity in system logs."}, {"icon": "\u270d\ufe0f", "title": "Visual Rule Builder", "desc": "Write hexadecimal patterns, string conditions, and metadata with live syntax checking and AST validation."}, {"icon": "\ud83d\udd0d", "title": "Instant Payload Testing", "desc": "Test your rules against sample binary files or logs directly in your browser with zero installation."}]
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
