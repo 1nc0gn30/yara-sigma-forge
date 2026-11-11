@@ -1,129 +1,120 @@
-# 🛡️ YARA-X & Sigma Threat Rule Forge
+# YARA-X & Sigma Threat Rule Forge
 
-> **Zero-Egress Threat Signature Compiler, Rolling Shannon Entropy Radar & MITRE ATT&CK Matrix Synthesizer.**
-> 100% client-side YARA-X & Sigma threat detection compiler with 60fps byte-offset entropy radar, CVE-2024-4577 PHP-CGI / ELF64 memfd / AI Agent exfil signatures, and MITRE ATT&CK mapping.
+[![Zoth Studio v2 Dossier](https://img.shields.io/badge/Zoth_Studio_v2-Dossier-D4AF37?style=flat-square)](https://zoth.nullai.tech/tools/yara-sigma-forge)
+[![Loopback Daemon](https://img.shields.io/badge/Daemon-127.0.0.1%3A8133-38BDF8?style=flat-square)](http://127.0.0.1:8133)
+[![License: MIT](https://img.shields.io/badge/License-MIT-10B981?style=flat-square)](LICENSE)
 
----
+Local-first YARA-X and Sigma threat detection rule compiler, Shannon byte-entropy scanner, and MITRE ATT&CK technique mapper. Compiles YARA (`.yar`) and Sigma (`.yml`) rules locally in the browser or CLI and evaluates payloads against built-in exploit and exfiltration signatures.
 
-## 🏛️ Architectural Overview
+## Overview
 
-**YARA-X & Sigma Threat Rule Forge** is an official sovereign tool in the **[Zoth Studio v2](https://zoth.nullai.tech)** (77-Tool Matrix) and **[ZothOS Linux 3.3](https://zothos.nullai.tech)** ecosystem, engineered by **1nc0gn30 • NullAI ([@1nc0gn30](https://github.com/1nc0gn30))**.
+**YARA-X & Sigma Threat Rule Forge** (`yara-sigma-forge`) provides a zero-dependency Python 3 loopback server (`127.0.0.1:8133`), standalone CLI rule compiler, and browser workstation integrated into **Zoth Studio v2** (`https://zoth.nullai.tech/tools/yara-sigma-forge`) and **ZothOS v3.4.0**.
 
-| Property | Specification |
+| Property | Value |
 | :--- | :--- |
 | **Tool ID** | `yara-sigma-forge` |
 | **Category** | `Security & Recon` |
-| **Loopback Port** | `http://127.0.0.1:8133` |
-| **Execution Mode** | `browser` / `python` |
-| **Zoth Studio Route** | [`http://127.0.0.1:3000/tools/yara-sigma-forge`](http://127.0.0.1:3000/tools/yara-sigma-forge) |
-| **ZothOS CLI** | `yara-sigma-forge`, `yara-forge`, `sigma-forge`, `zoth-yara-forge` |
-| **Access Model** | **100% Free & Open Access (Zero Paywalls)** |
+| **Loopback Bind** | `127.0.0.1:8133` |
+| **Zoth Studio v2 Dossier** | `https://zoth.nullai.tech/tools/yara-sigma-forge` |
+| **Local Studio Route** | `http://127.0.0.1:3000/tools/yara-sigma-forge` |
+| **Runtime Dependencies** | Python 3.10+ standard library (`http.server`, `socketserver`, `re`, `math`) |
+| **License** | MIT (100% free and open-source) |
 
----
-
-## 💎 Key Capabilities
-
-- **Zero-Egress In-Browser Compilation**: Compiles production YARA-X (`.yar`) rules and Sigma YAML (`.yml`) detection rules without external cloud dependencies.
-- **Byte-Offset Shannon Entropy Radar**: Calculates rolling Shannon entropy ($H = -\sum p_i \log_2 p_i$) across byte buffers to detect obfuscation, packed shellcode, and encrypted stagers.
-- **Battle-Tested Threat Presets**:
-  - `php-cgi-rce`: CVE-2024-4577 PHP-CGI FastCGI argument injection and code execution.
-  - `agent-exfil-trap`: LLM agent prompt injection to shell exfiltration via base64 pipe.
-  - `elf-shellcode-stager`: Linux ELF64 memfd anonymous memory execution and syscall stagers.
-  - `ransomware-shadow-copy`: Windows VSS shadow copy deletion and recovery disablement.
-- **MITRE ATT&CK Mapping**: Automatic alignment with techniques (T1190, T1059, T1552, T1048, T1620, T1490).
-
----
-
-## 🚀 ZothOS CLI Usage
-
-```bash
-# Check daemon and system status
-yara-sigma-forge --status
-yara-sigma-forge --json
-
-# Compile threat rules to stdout
-yara-forge --compile yara --preset php-cgi-rce
-yara-forge --compile sigma --preset agent-exfil-trap
-
-# Calculate Shannon byte entropy
-yara-sigma-forge --entropy "suspicious_base64_or_string"
-yara-sigma-forge --entropy /path/to/binary
-
-# Scan arbitrary payload against signature rules
-yara-sigma-forge --scan "POST /index.php?%ADd+allow_url_include=1"
-
-# Launch sovereign web workstation daemon
-python3 ~/NullAITech/yara-sigma-forge/server.py --port 8133
-```
-
----
-
-## ☕ Support 1nc0gn30 • NullAI (Zero Paywalls)
-
-All tools in the Zoth Arsenal are **100% free, open, and unlocked by default**. If you enjoy this tool and want to support continued sovereign development:
-
-- ☕ **Buy Us a Coffee (Stripe)**: [buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
-- ◎ **Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK` (`solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`)
-
----
-
-<div align="center">
-  <sub>Engineered by <b>1nc0gn30 • NullAI</b> (<a href="https://github.com/1nc0gn30">@1nc0gn30</a>) &bull; <a href="https://nullai.tech">NullAI Platform</a> &bull; <a href="https://zoth.nullai.tech">Zoth Studio v2</a></sub>
-</div>
-
----
-
-## 🏛️ ZothOS v3.4, Zoth Studio v2 & Obsidian Second Brain Ecosystem
+## Architecture
 
 ```mermaid
 flowchart LR
-    subgraph ZothOS["🐧 ZothOS v3.4 CLI & Braille TUI"]
-        CLI["yara-sigma-forge --help / --json"]
-        TUI["yara-sigma-forge-tui<br/>Unicode U+2800 2x4 Braille"]
-    end
-
-    subgraph Workstation["⚡ Sovereign Workstation"]
-        WEB["http://127.0.0.1:3000<br/>REST API & /health"]
-    end
-
-    subgraph Studio["🌌 Zoth Studio v2 & ZothOS-Lite"]
-        GODMODE["http://127.0.0.1:3000/tools/yara-sigma-forge<br/>God-Mode Workstation"]
-        LITE["http://127.0.0.1:8145<br/>ZothOS-Lite Web Desktop"]
-    end
-
-    subgraph SecondBrain["💎 Obsidian Second Brain & STDP"]
-        TRACKER["http://127.0.0.1:8151<br/>Zoth Obsidian Tracker"]
-        NEURO["http://127.0.0.1:8094<br/>Neuro-Memory STDP Cortex"]
-        NOTE["Studio/Tools/Studio yara-sigma-forge.md"]
-    end
-
-    CLI --> WEB
-    TUI --> WEB
-    WEB <--> GODMODE
-    WEB <--> LITE
-    WEB --> TRACKER
-    TRACKER <--> NOTE
-    NOTE <--> NEURO
+    CLI["bin/yara-sigma-forge"] --> COMPILER["YARA-X & Sigma Rule Emitter"]
+    CLI --> SCANNER["Entropy & Pattern Matcher"]
+    UI["public/index.html"] --> API["server.py (127.0.0.1:8133)"]
+    API --> PRESETS["4 Built-In MITRE ATT&CK Presets"]
+    API --> SCANNER
 ```
 
-### Cross-Surface Integration Matrix
+### Built-In Threat Signature Presets
 
-| Surface | Endpoint / Binary | Capabilities |
-| :--- | :--- | :--- |
-| **Standalone Workstation** | `http://127.0.0.1:3000` | 100% Free & Open-Access Web Deck, live `/health` & REST telemetry |
-| **Zoth Studio v2 Route** | `http://127.0.0.1:3000/tools/yara-sigma-forge` | Interactive God-Mode component inside Zoth Studio (`https://zoth.nullai.tech`) |
-| **ZothOS v3.4 CLI & TUI** | `yara-sigma-forge` / `yara-sigma-forge-tui` | Global binary in `/usr/local/bin/` with Unicode `U+2800` Braille TUI & `--json` output |
-| **ZothOS-Lite Web Desktop** | `http://127.0.0.1:8145` | Browser-native KDE-style window manager & terminal launcher |
-| **Zoth Obsidian Tracker** | `http://127.0.0.1:8151` | Interactive Obsidian Second Brain vault explorer (`~/Documents/Obsidian Vault/Studio/Tools/Studio yara-sigma-forge.md`) |
-| **Neuro-Memory STDP Cortex** | `http://127.0.0.1:8094` | 3-Factor STDP synaptic memory daemon & 21-tool MCP server |
+| Preset ID | Rule Name | Severity | MITRE ATT&CK Techniques |
+| :--- | :--- | :--- | :--- |
+| `php-cgi-rce` | `ZOTH_PHP_CGI_Arg_Injection_RCE` | `CRITICAL` | `T1190`, `T1059.004` (CVE-2024-4577 PHP-CGI argument injection) |
+| `agent-exfil-trap` | `ZOTH_Agent_MCP_Credential_Exfil` | `HIGH` | `T1552.001`, `T1048` (`.env` / `id_ed25519` curl/base64 exfiltration) |
+| `elf-shellcode-stager` | `ZOTH_ELF64_Memfd_Reflective_Loader` | `CRITICAL` | `T1620`, `T1027` (`\x7fELF`, `memfd_create`, `fexecve`, `/proc/self/fd/`) |
+| `ransomware-shadow-copy` | `ZOTH_Ransomware_Vssadmin_Delete_Shadows` | `CRITICAL` | `T1490`, `T1059.001` (`vssadmin`, `shadowcopy delete`, `bcdedit`, `wbadmin`) |
+
+Payloads are marked `SUSPICIOUS` when any preset meets its `minMatches` threshold or when Shannon entropy ($H = -\sum p_i \log_2 p_i$) exceeds `5.5` bits/byte.
+
+## Quickstart
 
 ```bash
-# Inspect CLI & Unicode U+2800 Braille TUI on ZothOS v3.4
-yara-sigma-forge --help
-yara-sigma-forge-tui --status
-yara-sigma-forge-tui --json
+git clone https://github.com/1nc0gn30/yara-sigma-forge.git
+cd yara-sigma-forge
 
-# Verify Second Brain Vault & 12-Step Verification Gallery on :8151
-zoth-obsidian-tracker --verify
+# Start the threaded loopback daemon on 127.0.0.1:8133
+python3 server.py --port 8133
 ```
 
+Open `http://127.0.0.1:8133` in a browser, or query the REST API directly:
+
+```bash
+# Health check
+curl -s http://127.0.0.1:8133/health | python3 -m json.tool
+
+# List built-in signature presets
+curl -s http://127.0.0.1:8133/api/presets | python3 -m json.tool
+
+# Scan a sample payload against all presets + Shannon entropy
+curl -s -X POST http://127.0.0.1:8133/api/scan \
+  -H "Content-Type: application/json" \
+  -d '{"payload":"POST /index.php?%ADd+allow_url_include%3d1+%ADd+auto_prepend_file%3dphp://input"}' \
+  | python3 -m json.tool
+```
+
+### REST API Endpoints
+
+| Method | Route | Description |
+| :--- | :--- | :--- |
+| `GET` | `/health`, `/api/health` | Returns service health (`status: "ok"`), version, port (`8133`), and rule count (`4`). |
+| `GET` | `/api/status` | Returns online status and available preset IDs. |
+| `GET` | `/api/presets` | Returns full preset definitions, ASCII/regex patterns, severities, and MITRE mappings. |
+| `POST` | `/api/scan` | Accepts JSON `{"payload": "..."}` (or raw text body); returns `entropy`, `bytes`, `verdict` (`CLEAN` or `SUSPICIOUS`), and per-rule match details. |
+| `GET` | `/` | Serves the static browser workstation from `public/`. |
+
+## CLI & ZothOS Usage
+
+```bash
+# Show CLI flags and options
+./bin/yara-sigma-forge --help
+
+# Output JSON installation and daemon telemetry
+./bin/yara-sigma-forge --json
+
+# Compile YARA or Sigma rules to stdout
+./bin/yara-sigma-forge --compile yara --preset php-cgi-rce
+./bin/yara-sigma-forge --compile sigma --preset agent-exfil-trap
+
+# Compute Shannon entropy on a string or file path
+./bin/yara-sigma-forge --entropy "0123456789abcdefABCDEF" --json
+
+# Scan a string or file path against all built-in threat presets
+./bin/yara-sigma-forge --scan "POST /index.php?%ADd+allow_url_include=1+%ADd+auto_prepend_file=php://input" --json
+
+# Start the HTTP server via CLI
+./bin/yara-sigma-forge --serve 8133
+
+# Render the Unicode U+2800 Braille TUI sparkline view or JSON benchmark
+./bin/yara-sigma-forge-tui
+./bin/yara-sigma-forge-tui --json
+```
+
+## Testing & Verification
+
+```bash
+python3 -m pytest -q
+```
+
+Verifies Shannon entropy bounds, preset schema integrity and MITRE ATT&CK mappings, and ephemeral-port HTTP `/health`, `/api/presets`, and `POST /api/scan` detection accuracy.
+
+## License
+
+Released under the [MIT License](LICENSE). Copyright (c) 2026 [1nc0gn30](https://1nc0gn30.si) (`@1nc0gn30`) & [NullAI](https://nullai.tech).
+
+100% free and open-source with zero paywalls. Optional support: [Buy Us a Coffee (Stripe)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X).

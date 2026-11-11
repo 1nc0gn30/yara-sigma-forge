@@ -20,7 +20,8 @@ TOOL_DESC = "100% client-side YARA-X & Sigma threat detection compiler with 60fp
 TOOL_VERSION = "3.3.0"
 TOOL_CATEGORY = "Security & Recon"
 TOOL_PORT = 8133
-REPO_DIR = "/opt/yara-sigma-forge"
+_CANDIDATE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO_DIR = _CANDIDATE_ROOT if os.path.isfile(os.path.join(_CANDIDATE_ROOT, "server.py")) else "/opt/yara-sigma-forge"
 STUDIO_URL = f"http://127.0.0.1:3000/tools/{TOOL_ID}"
 LOCAL_PORT_URL = f"http://127.0.0.1:{TOOL_PORT}"
 
@@ -235,7 +236,6 @@ def main():
         "version": TOOL_VERSION,
         "category": TOOL_CATEGORY,
         "installed": os.path.exists(REPO_DIR),
-        "repo_path": REPO_DIR,
         "studio_workbench_url": STUDIO_URL,
         "local_endpoint": LOCAL_PORT_URL,
         "daemon_running": daemon_running,
@@ -243,7 +243,6 @@ def main():
         "license": "100% Free & Open Access (Zero Paywalls)",
         "support": {
             "stripe_buy_coffee": "https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X",
-            "solana_wallet": "GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK",
         },
         "status": "ONLINE" if daemon_running else "READY",
     }
@@ -252,11 +251,10 @@ def main():
         print(json.dumps(info, indent=2))
         return
 
-    print(f"✦ {TOOL_NAME} (v{TOOL_VERSION}) — [{TOOL_CATEGORY}]")
-    print(f"  Repository : {REPO_DIR}")
+    print(f"{TOOL_NAME} (v{TOOL_VERSION}) — [{TOOL_CATEGORY}]")
     print(f"  Workbench  : {STUDIO_URL}")
     print(f"  Local Port : {LOCAL_PORT_URL} (Daemon: {'ONLINE' if daemon_running else 'STANDBY'})")
-    print(f"  Access     : 100% Free & Open Access (☕ https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X | ◎ GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK)")
+    print("  Access     : 100% Free & Open Access (https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)")
 
 
 if __name__ == "__main__":
