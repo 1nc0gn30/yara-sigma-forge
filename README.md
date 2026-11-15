@@ -113,8 +113,12 @@ python3 -m pytest -q
 
 Verifies Shannon entropy bounds, preset schema integrity and MITRE ATT&CK mappings, and ephemeral-port HTTP `/health`, `/api/presets`, and `POST /api/scan` detection accuracy.
 
+## Support
+
+YARA-X & Sigma Threat Rule Forge is 100% free and open-source with zero paywalls:
+- **☕ Buy Us a Coffee (Stripe)**: [https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
+- **◎ Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
+
 ## License
 
-Released under the [MIT License](LICENSE). Copyright (c) 2026 [1nc0gn30](https://1nc0gn30.si) (`@1nc0gn30`) & [NullAI](https://nullai.tech).
-
-100% free and open-source with zero paywalls. Optional support: [Buy Us a Coffee (Stripe)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X).
+Engineered by **Neal Frazier Tech (@1nc0gn30) • NullAI Platform** ([GitHub](https://github.com/1nc0gn30/yara-sigma-forge) · [https://nullai.tech](https://nullai.tech)). Released under the [MIT License](LICENSE).
